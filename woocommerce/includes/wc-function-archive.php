@@ -90,6 +90,12 @@ function estore_loop_product_div_image_open(){
 add_action( 'woocommerce_before_shop_loop_item_title', 'estore_loop_product_div_image_close', 30);
 function estore_loop_product_div_image_close(){
 	global $product;
+	$attachment_ids = $product->get_gallery_image_ids();
+	if ( $attachment_ids && has_post_thumbnail() ) {
+		foreach ( $attachment_ids as $attachment_id ) {
+			echo wp_get_attachment_image( $attachment_id, 'shop_catalog');
+		}
+	}
 	?>
 	<div class="w3_hs_bottom w3_hs_bottom_sub1">
 		<ul>
@@ -125,4 +131,35 @@ function estore_add_class_add__to_cart($args){
 	$args['class'] =  $args['class'] . ' w3ls-cart';
 
 	return $args;
+}
+
+
+add_filter( 'woocommerce_subcategory_count_html', 'estore_subcategory_remove_count');
+function estore_subcategory_remove_count( $html){
+	$html = '';
+	return $html;
+}
+
+
+remove_filter('woocommerce_before_shop_loop','woocommerce_result_count', 20);
+remove_filter('woocommerce_before_shop_loop','woocommerce_catalog_ordering', 30);
+
+add_action( 'woocommerce_before_shop_loop', 'estore_before_shop_div_price_open', 15 );
+function estore_before_shop_div_price_open(){
+	?>
+	<div class="w3ls_mobiles_grid_right_grid2">
+		<div class="w3ls_mobiles_grid_right_grid2_left">
+			<?php woocommerce_result_count(); ?>
+		</div>
+	<?php
+}
+add_action( 'woocommerce_before_shop_loop', 'estore_before_shop_div_price_close', 35 );
+function estore_before_shop_div_price_close(){
+	?>
+		<div class="w3ls_mobiles_grid_right_grid2_right">
+			<?php woocommerce_catalog_ordering(); ?>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+	<?php
 }
