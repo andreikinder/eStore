@@ -46,3 +46,49 @@ function esp_search_ajax_action_callback(){
 	wp_die();
 
 }
+
+
+add_action('wp_ajax_ajax_quick_view', 'esp_quick_view_product_callback');
+add_action('wp_ajax_nopriv_ajax_quick_view', 'esp_quick_view_product_callback');
+function esp_quick_view_product_callback(){
+	if(!wp_verify_nonce( $_POST['nonce'], 'qick-nonce' )) {
+		wp_die('Данные отправлены с чужого сервера');
+	}
+
+	$product = wc_get_product(esc_attr($_POST['id']));
+
+	ob_start(); ?>
+
+	<div class="modal-body">
+		<div class="col-md-5 modal_body_left">
+		<?php
+			$attachment_id = get_post_thumbnail_id( $product->get_id() );
+			$product_thumb = wp_get_attachment_image_url( $attachment_id, 'shop_single');
+			?>
+			<img src="<?php echo $product_thumb; ?>" alt=" " class="img-responsive" />
+		</div>
+		<div class="col-md-7 modal_body_right">
+			<h4> <?php echo $product->get_name(); ?> </h4>
+			<p> <?php echo $product->get_description(); ?></p>
+			<div class="simpleCart_shelfItem">
+				<?php $product->get_price_html(); ?>
+				<?php  
+				printf( '<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
+				esc_url( $product->add_to_cart_url() ),
+				esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
+				'button product_type_'. $product->get_type() .' add_to_cart_button ajax_add_to_cart w3ls-cart',
+				'data-product_id="' . $product->get_id() . '" data-product_sku="' . $product->get_sku() . '" aria-label="'. $product->get_description() .'"',
+				esc_html( $product->add_to_cart_text() )
+			)  ?>
+	
+			</div> 	
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+
+<?php
+
+	$data['product'] = ob_get_clean();
+	wp_send_json($data);
+	wp_die();
+}

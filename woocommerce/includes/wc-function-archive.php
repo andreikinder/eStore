@@ -89,11 +89,12 @@ function estore_loop_product_div_image_open(){
 }
 add_action( 'woocommerce_before_shop_loop_item_title', 'estore_loop_product_div_image_close', 30);
 function estore_loop_product_div_image_close(){
+	global $product;
 	?>
 	<div class="w3_hs_bottom w3_hs_bottom_sub1">
 		<ul>
 			<li>
-				<a href="#" data-toggle="modal" data-target="#myModal4"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+				<a href="#" data-toggle="modal" data-target="#modal_qick_view" data-product-id="<?php echo $product->get_id()?>" class="modal-product-link"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 			</li>
 		</ul>
 	</div>

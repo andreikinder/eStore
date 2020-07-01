@@ -41,4 +41,19 @@ function estore_woocommerce_scripts() {
 
 
 
- 
+ add_action('wp_footer','estore_modal_footer');
+ function estore_modal_footer(){ ?>
+<div class="modal video-modal fade" id="modal_qick_view" tabindex="-1" role="dialog" aria-labelledby="modal_qick_view">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>						
+				</div>
+				<section>
+				
+				</section>
+			</div>
+		</div>
+	</div>
+<?php
+ }

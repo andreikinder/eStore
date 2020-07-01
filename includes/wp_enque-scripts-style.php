@@ -43,6 +43,13 @@ function estore_scripts() {
 		'url' => admin_url( 'admin-ajax.php'),	
 		'nonce' => wp_create_nonce( 'search-nonce' )
 	) );
+	
+	wp_enqueue_script( 'ajax-qick', get_template_directory_uri() . '/assets/js/ajax-qick-view.js', array('jquery'), null, true );
+	wp_localize_script( 'ajax-qick', 'ajax_qick', array(
+		'url' => admin_url( 'admin-ajax.php'),	
+		'nonce' => wp_create_nonce( 'qick-nonce' )
+	) );
+
 
 
 	wp_enqueue_script( 'main-script', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), null, true );
