@@ -5553,4 +5553,22 @@ nav.woocommerce-pagination .page-numbers li > *:hover{
 .w3ls_mobiles_grid_right_grid2 li.product-category {
 	margin-bottom: 30px;
 }
-/*test*/
+.shop_table  .product-remove{
+	width: 20px;
+}
+
+.shop_table .product-thumbnail img{
+	width: 75px !important;
+	height: auto;
+}
+.shop_table .product-remove,
+.shop_table .product-thumbnail,
+.shop_table .product-name,
+.shop_table .product-price,
+.shop_table .product-quantity,
+.shop_table .product-subtotal{
+	vertical-align: middle;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}

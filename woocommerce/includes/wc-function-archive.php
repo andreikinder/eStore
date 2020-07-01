@@ -57,6 +57,17 @@ function estore_hide_title_shop( $hide ) {
 	return $hide;
 }
 
+add_filter( 'post_class', 'estore_add_class_loop_item_cross' );
+function estore_add_class_loop_item_cross($clasess){
+	if(is_cart()){
+		if(in_array('product',$clasess))
+		$clasess[] = 'col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles';
+	}
+	//get_pr($clasess, false);
+	return $clasess;
+}
+
+
 add_filter( 'post_class', 'estore_add_class_loop_item' );
 function estore_add_class_loop_item($clasess){
 	if(is_shop() || is_product_taxonomy()){
@@ -65,6 +76,9 @@ function estore_add_class_loop_item($clasess){
 	//get_pr($clasess, false);
 	return $clasess;
 }
+
+
+
 remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5);
 
