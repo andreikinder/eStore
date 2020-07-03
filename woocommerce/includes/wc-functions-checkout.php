@@ -1,0 +1,100 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+
+add_filter( 'woocommerce_form_field_args', 'estore_wc_custom_checkout');
+function estore_wc_custom_checkout ( $fields) {
+  	$fields["input_class"] = ['form-control'];
+	return $fields;
+}
+
+// add_filter( 'woocommerce_default_address_fields', 'estore_wc_custom_checkout_default_fields');
+// function estore_wc_custom_checkout_default_fields ( $fields) {
+// 	$fields['address_1']['class'] = ['col-md-6'];
+// 	$fields['address_2']['class'] = ['col-md-6'];
+// 	$fields['city']['class'] = ['col-md-4'];
+// 	$fields['state']['class'] = ['col-md-4'];
+// 	$fields['postcode']['class'] = ['col-md-4'];
+// 	return $fields;
+// } 
+
+add_filter( 'woocommerce_default_address_fields', 'estore_woocommerce_custom_checkout_default_fields' );
+function estore_woocommerce_custom_checkout_default_fields($fields){
+	$fields['address_2']['label'] = 'Квартира, дом';
+	unset( $fields['company']);
+	return $fields;
+}
+
+add_filter( 'woocommerce_billing_fields', 'estore_wc_checkout_billing_fields', 10 , 2);
+function estore_wc_checkout_billing_fields($address_fields, $country) {
+
+	$address_fields['billing_first_name']['class'] = ['col-md-6 my-3'];
+	$address_fields['billing_last_name']['class'] = ['col-md-6 my-3'];
+ 
+	$address_fields['billing_country']['class'] = ['hidden'];
+ 
+
+
+	$address_fields['billing_address_1']['class'] = ['col-md-6 my-3'];
+	$address_fields['billing_address_2']['class'] = ['col-md-6 my-3'];
+	$address_fields['billing_city']['class'] = ['col-md-4 my-3'];
+	$address_fields['billing_state']['class'] = ['col-md-4 my-3'];
+	$address_fields['billing_postcode']['class'] = ['col-md-4 my-3 '];
+	$address_fields['billing_phone']['class'] = ['col-md-6 my-3'];
+	$address_fields['billing_email']['class'] = ['col-md-6 my-3'];
+	return $address_fields;
+}
+
+ 
+add_action( 'woocommerce_before_checkout_form', 'estore_checkout_form_start' );
+function estore_checkout_form_start(){
+
+	?>
+	<div class="row">
+	<?php
+
+}
+add_action( 'woocommerce_after_checkout_form', 'estore_checkout_form_close' );
+function estore_checkout_form_close(){
+
+	?>
+	</div>
+	<?php
+
+}
+add_action( 'woocommerce_checkout_before_customer_details', 'estore_customer_details_start' );
+function estore_customer_details_start(){
+
+	?>
+	<div class="col-md-8">
+		<div class="row">
+	<?php
+
+}
+add_action( 'woocommerce_checkout_after_customer_details', 'estore_customer_details_close' );
+function estore_customer_details_close(){
+
+	?>
+		</div>
+	</div>
+	<?php
+
+}
+
+add_action( 'woocommerce_checkout_before_order_review_heading', 'estore_order_review_start' );
+function estore_order_review_start(){
+
+	?>
+	<div class="col-md-4">
+	<?php
+
+}
+add_action( 'woocommerce_checkout_after_order_review', 'estore_order_review_close' );
+function estore_order_review_close(){
+
+	?>
+	</div>
+	<?php
+}
