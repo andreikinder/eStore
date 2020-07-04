@@ -14,8 +14,11 @@ get_header();
 			<div class="w3ls_mobiles_grids">
 				<div class="col-md-12 w3ls_mobiles_grid_left">
 				<?php
-					while ( have_posts() ) :
-						the_post(); ?>
+					while ( have_posts() ) : the_post(); 
+						if (is_order_received_page()	): ?>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-3"> 
+				<?php endif; ?>
 			
 						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 						<header class="entry-header">
@@ -32,6 +35,11 @@ get_header();
 					</article><!-- #post-<?php the_ID(); ?> -->
 				<?php
 					endwhile; // End of the loop.
+
+					if (is_order_received_page()): ?>
+						 </div>
+						 </div>
+					<?php endif;  
 				?>
 
 				

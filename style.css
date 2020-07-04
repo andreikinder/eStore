@@ -96,7 +96,7 @@ a.act {
 .search{
 	position: relative;
     display: inline-block;
-    float: left;
+    /* float: left; */
     margin:0.8em 0 0 8em;
 }
 label.icon-search {
@@ -5097,7 +5097,7 @@ td.invert-image a img {
 .search{
 	position: relative;
 	display: inline-block;
-	float: left;
+	/* float: left; */
 	margin:0.8em 0 0 8em;
 }
 label.icon-search {

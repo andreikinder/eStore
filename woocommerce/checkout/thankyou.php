@@ -18,7 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<div class="woocommerce-order">
+<div class="woocommerce-order my-3">
 
 	<?php
 	if ( $order ) :
@@ -39,34 +39,34 @@ defined( 'ABSPATH' ) || exit;
 
 		<?php else : ?>
 
-			<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+			<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received my-3"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 
-			<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
+			<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details list-group">
 
-				<li class="woocommerce-order-overview__order order">
+				<li class="woocommerce-order-overview__order order list-group-item">
 					<?php esc_html_e( 'Order number:', 'woocommerce' ); ?>
 					<strong><?php echo $order->get_order_number(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 				</li>
 
-				<li class="woocommerce-order-overview__date date">
+				<li class="woocommerce-order-overview__date date list-group-item">
 					<?php esc_html_e( 'Date:', 'woocommerce' ); ?>
 					<strong><?php echo wc_format_datetime( $order->get_date_created() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 				</li>
 
 				<?php if ( is_user_logged_in() && $order->get_user_id() === get_current_user_id() && $order->get_billing_email() ) : ?>
-					<li class="woocommerce-order-overview__email email">
+					<li class="woocommerce-order-overview__email email list-group-item">
 						<?php esc_html_e( 'Email:', 'woocommerce' ); ?>
 						<strong><?php echo $order->get_billing_email(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 					</li>
 				<?php endif; ?>
 
-				<li class="woocommerce-order-overview__total total">
+				<li class="woocommerce-order-overview__total  list-group-item">
 					<?php esc_html_e( 'Total:', 'woocommerce' ); ?>
 					<strong><?php echo $order->get_formatted_order_total(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 				</li>
 
 				<?php if ( $order->get_payment_method_title() ) : ?>
-					<li class="woocommerce-order-overview__payment-method method">
+					<li class="woocommerce-order-overview__payment-method method list-group-item">
 						<?php esc_html_e( 'Payment method:', 'woocommerce' ); ?>
 						<strong><?php echo wp_kses_post( $order->get_payment_method_title() ); ?></strong>
 					</li>
